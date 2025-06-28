@@ -218,50 +218,6 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <Card className="glass-effect border-white/10">
-          <CardHeader>
-            <CardTitle className="text-white">Quick Actions</CardTitle>
-            <CardDescription>Common tasks and shortcuts</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <Button 
-              variant="outline" 
-              className="w-full justify-start border-white/20 hover:bg-white/10 text-white"
-              onClick={() => {
-                toast({
-                  title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-                });
-              }}
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              Call Lead
-            </Button>
-            <Button 
-              variant="outline" 
-              className="w-full justify-start border-white/20 hover:bg-white/10 text-white"
-              onClick={() => {
-                toast({
-                  title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-                });
-              }}
-            >
-              <Mail className="w-4 h-4 mr-2" />
-              Send Email
-            </Button>
-            <Button 
-              variant="outline" 
-              className="w-full justify-start border-white/20 hover:bg-white/10 text-white"
-              onClick={() => {
-                toast({
-                  title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-                });
-              }}
-            >
-              <Calendar className="w-4 h-4 mr-2" />
-              Schedule Follow-up
-            </Button>
-          </CardContent>
-        </Card>
       </motion.div>
 
       {showLeadForm && (
