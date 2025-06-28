@@ -96,15 +96,9 @@ export const useLeads = () => {
     const savedLeads = localStorage.getItem('crm_leads');
     if (savedLeads) {
         const parsedLeads = JSON.parse(savedLeads);
-        return parsedLeads.map(lead => {
-            const { value, ...rest } = lead;
-            return rest;
-        });
+        return parsedLeads;
     }
-    return initialMockLeads.map(lead => {
-        const { value, ...rest } = lead;
-        return rest;
-    });
+    return initialMockLeads;
   }, []);
 
   const storeLeads = useCallback((leadsToStore) => {
@@ -118,10 +112,7 @@ export const useLeads = () => {
       setTimeout(() => {
         let allLeads = getStoredLeads();
         if (allLeads.length === 0 && initialMockLeads.length > 0) {
-          allLeads = initialMockLeads.map(lead => {
-            const { value, ...rest } = lead;
-            return rest;
-          });
+          allLeads = [...initialMockLeads];
           storeLeads(allLeads);
         }
         
@@ -144,9 +135,8 @@ export const useLeads = () => {
   }, [user, getStoredLeads, storeLeads]);
 
   const addLead = (leadData) => {
-    const { value, ...restOfLeadData } = leadData;
     const newLead = {
-      ...restOfLeadData,
+      ...leadData,
       id: Date.now(),
       createdAt: new Date().toISOString(),
       status: 'new',
@@ -166,15 +156,14 @@ export const useLeads = () => {
   };
 
   const updateLead = (leadId, updates) => {
-    const { value, ...restOfUpdates } = updates;
     const allLeads = getStoredLeads();
-    const updatedLeadsStored = allLeads.map(lead => 
-      lead.id === leadId ? { ...lead, ...restOfUpdates } : lead
+    const updatedLeadsStored = allLeads.map(lead =>
+      lead.id === leadId ? { ...lead, ...updates } : lead
     );
     storeLeads(updatedLeadsStored);
 
-    setLeads(prev => prev.map(lead => 
-      lead.id === leadId ? { ...lead, ...restOfUpdates } : lead
+    setLeads(prev => prev.map(lead =>
+      lead.id === leadId ? { ...lead, ...updates } : lead
     ).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
   };
 
